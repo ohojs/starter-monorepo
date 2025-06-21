@@ -4,6 +4,8 @@
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "scripts": {
+    "commit": "git-cz",
+    "prepare": "is-ci || husky",
     "build": "nr -r build",
     "dev": "nr -r dev",
     "lint": "eslint --cache .",
@@ -12,30 +14,41 @@
     "docs:build": "pnpm -C docs run docs:build",
     "release": "bumpp -r && pnpm -r publish",
     "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "@antfu/ni": "catalog:",
     "@antfu/utils": "catalog:",
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
     "@types/node": "catalog:",
     "bumpp": "catalog:",
+    "commitizen": "catalog:",
+    "cz-conventional-changelog": "catalog:",
     "eslint": "catalog:",
+    "husky": "catalog:",
+    "is-ci": "catalog:",
     "lint-staged": "catalog:",
     "pkg-placeholder": "workspace:*",
     "pnpm": "catalog:",
-    "simple-git-hooks": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
     "unbuild": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
